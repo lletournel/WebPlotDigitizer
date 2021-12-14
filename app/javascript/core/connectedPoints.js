@@ -204,6 +204,60 @@ wpd.AreaMeasurement = class extends wpd.ConnectedPoints {
         return 0;
     }
 
+    getCentroid_x(index) {
+
+        if (index < this._connections.length) {
+            let Cx = 0.0;
+            for (let pi = 0; pi < this._connections[index].length; pi += 2) {
+
+                let px1 = this._connections[index][pi];
+                let py1 = this._connections[index][pi + 1];
+
+                let px2 = 0.0;
+                let py2 = 0.0;
+                if (pi <= this._connections[index].length - 4) {
+                    px2 = this._connections[index][pi + 2];
+                    py2 = this._connections[index][pi + 3];
+                } else {
+                    px2 = this._connections[index][0];
+                    py2 = this._connections[index][1];
+                }
+                Cx += (px1 + px2)*(px1*py2 - px2*py1)
+            }
+            Cx /= 6 * this.getArea(index)
+            return Cx
+        }
+         return 0.;
+
+    }
+
+    getCentroid_y(index) {
+
+        if (index < this._connections.length) {
+            let Cy = 0.0;
+            for (let pi = 0; pi < this._connections[index].length; pi += 2) {
+
+                let px1 = this._connections[index][pi];
+                let py1 = this._connections[index][pi + 1];
+
+                let px2 = 0.0;
+                let py2 = 0.0;
+                if (pi <= this._connections[index].length - 4) {
+                    px2 = this._connections[index][pi + 2];
+                    py2 = this._connections[index][pi + 3];
+                } else {
+                    px2 = this._connections[index][0];
+                    py2 = this._connections[index][1];
+                }
+                Cy += (py1 + py2)*(px1*py2 - px2*py1)
+            }
+            Cy /= 6 * this.getArea(index)
+            return Cy
+        }
+        return 0.;
+
+    }
+
     getPerimeter(index) {
         if (index < this._connections.length) {
             let totalDist = 0.0;

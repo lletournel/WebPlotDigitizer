@@ -430,6 +430,8 @@ wpd.MeasurementRepainter = (function() {
                     let labelspx = wpd.graphicsWidget.screenPx(labelx, labely);
                     let areaStr = "";
                     let periStr = "";
+                    let cxStr = "";
+                    let cyStr = "";
                     if (wpd.appData.isAligned() === true && axes instanceof wpd.MapAxes) {
                         areaStr = "Area" + connIdx + ": " +
                             axes.pixelToDataArea(connData.getArea(connIdx)).toFixed(2) + ' ' +
@@ -438,13 +440,25 @@ wpd.MeasurementRepainter = (function() {
                             "Perimeter" + connIdx + ": " +
                             axes.pixelToDataDistance(connData.getPerimeter(connIdx)).toFixed(2) +
                             ' ' + axes.getUnits();
+                        cxStr =
+                            "Centroid_x" + connIdx + ": " +
+                            axes.pixelToDataDistance(connData.getCentroid_x(connIdx)).toFixed(2) +
+                            ' ' + axes.getUnits();
+                        cyStr =
+                            "Centroid_y" + connIdx + ": " +
+                            axes.pixelToDataDistance(connData.getCentroid_y(connIdx)).toFixed(2) +
+                            ' ' + axes.getUnits();
                     } else {
                         areaStr = "Area" + connIdx + ": " + connData.getArea(connIdx).toFixed(2) +
                             ' px^2';
                         periStr = "Perimeter" + connIdx + ": " +
                             connData.getPerimeter(connIdx).toFixed(2) + ' px';
+                        cxStr = "Cx" + connIdx + ": " +
+                            connData.getCentroid_x(connIdx).toFixed(2) + ' px';
+                        cyStr = "Cy" + connIdx + ": " +
+                            connData.getCentroid_y(connIdx).toFixed(2) + ' px';
                     }
-                    let label = areaStr + ", " + periStr;
+                    let label = areaStr + ", " + periStr+ ", " + cxStr+ ", " + cyStr;
                     drawLabel(labelspx.x, labelspx.y, labelx, labely, label);
                 }
             };

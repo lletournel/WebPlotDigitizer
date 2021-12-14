@@ -343,14 +343,18 @@ wpd.measurementDataProvider = (function() {
                 if (isMap) {
                     rawData[conni][1] = axes.pixelToDataArea(_ms.getArea(conni));
                     rawData[conni][2] = axes.pixelToDataDistance(_ms.getPerimeter(conni));
+                    rawData[conni][3] = axes.pixelToDataDistance(_ms.getCentroid_x(conni));
+                    rawData[conni][4] = axes.pixelToDataDistance(_ms.getCentroid_y(conni));
                 } else {
                     rawData[conni][1] = _ms.getArea(conni);
                     rawData[conni][2] = _ms.getPerimeter(conni);
+                    rawData[conni][3] = _ms.getCentroid_x(conni);
+                    rawData[conni][4] = _ms.getCentroid_y(conni);
                 }
             }
 
-            fields = ['Label', 'Area', 'Perimeter'];
-            isFieldSortable = [false, true, true];
+            fields = ['Label', 'Area', 'Perimeter', 'Centroid_x', 'Centroid_y'];
+            isFieldSortable = [false, true, true, true, true];
         }
 
         return {
